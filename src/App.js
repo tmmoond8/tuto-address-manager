@@ -29,7 +29,7 @@ class App extends Component {
     );
   }
   onClick() {
-    this.props.store.dispatch(increase(1));
+    this.props.store.dispatch(this.props.increase(1));
   }
 }
 

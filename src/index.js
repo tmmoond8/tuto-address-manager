@@ -41,8 +41,13 @@ const counterReducer = (state = initialState, action) => {
 const store = createStore(counterReducer);
 
 const render = () => {
-	
-}
+	ReactDOM.render(
+		<App store={store} increase={increase}/>,
+		 document.getElementById('root')
+	);
+};
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+store.subscribe(render);
+render();
+// ReactDOM.render(<App />, document.getElementById('root'));
+// registerServiceWorker();
