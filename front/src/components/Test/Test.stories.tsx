@@ -1,8 +1,8 @@
-import React from "react";
-import Test from ".";
+import React from 'react';
+import Test from '.';
 
 export default {
-  title: "Test",
+  title: 'Test',
   component: Test,
 };
 
