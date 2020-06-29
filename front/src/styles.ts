@@ -13,6 +13,7 @@ export const Color = {
   Greyaa: '#aaaaaa',
   Greyad: '#adadad',
   Greycd: '#cdcdcd',
+  Greyce: '#cecece',
   Greyd3: '#d3d3d3',
   Greye1: '#e1e1e1',
   Greyf4: '#f4f4f4',
@@ -22,6 +23,7 @@ export const Color = {
   Sky: '#4ea3f8',
   Red: '#ff5b5c',
   Tomato: '#ed635e',
+  Transparent: 'transparent',
 };
 
 export const tablet = (style: SerializedStyles): SerializedStyles => css`
