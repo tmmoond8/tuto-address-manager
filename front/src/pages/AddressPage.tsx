@@ -16,6 +16,8 @@ export default function AddressPage() {
     defaultAddressId,
     setDefaultAddressId,
     removeAddress,
+    loadMore,
+    isEOP,
   } = useAddress();
   const handleSetDefaultAddress = useCallback(
     async (addressId: number) => {
@@ -51,6 +53,7 @@ export default function AddressPage() {
           />
         ))}
       </List>
+      {!isEOP && <LoadMore onClick={loadMore}>더보기</LoadMore>}
       <Footer>
         <AddressGuideBox />
       </Footer>
@@ -65,4 +68,14 @@ const List = styled.ul`
 
 const Footer = styled.footer`
   margin: 30px 20px 71px 20px;
+`;
+
+const LoadMore = styled.button`
+  height: 50px;
+  width: 100%;
+  font-size: 16px;
+  color: ${Color.Grey25};
+  background-color: ${Color.Transparent};
+  border: none;
+  border-bottom: 1px solid ${Color.Grey8C};
 `;

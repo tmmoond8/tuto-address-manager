@@ -2,6 +2,7 @@ import { css, SerializedStyles } from '@emotion/core';
 
 export const Color = {
   Black: '#000000',
+  Grey25: '#252525',
   Grey2F: '#2f2f2f',
   Grey36: '#363636',
   Grey3D: '#3d3d3d',
