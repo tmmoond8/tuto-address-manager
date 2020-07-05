@@ -40,7 +40,7 @@ export default function TabLayout(props: TabLayoutProps) {
   const { children } = props;
   const [tabIndex, setTabIndex] = useState(3);
   const handleClickTab = useCallback((index: number) => {
-    setTabIndex(index);
+    setTabIndex(index); 
   }, []);
   return (
     <div>
