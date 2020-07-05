@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import AddressListHead from '../components/AddressListHead';
 import AddressLitem from '../components/AddressListItem';
 import AddressGuideBox from '../components/AddressGuideBox';
+import AddressEmpty from '../components/AddressEmpty';
 import { Color } from '../styles';
 import { useAddress } from '../lib/hooks';
 import * as APIs from '../lib/apis';
@@ -46,15 +47,19 @@ export default function AddressPage() {
     <Fragment>
       <AddressListHead handleAdd={() => {}} />
       <List>
-        {addresses.map((address) => (
-          <AddressLitem
-            key={address.id}
-            {...address}
-            handleRemove={() => handleRemoveAddress(address.id)}
-            handleSetDefault={() => handleSetDefaultAddress(address.id)}
-            isDefault={address.id === defaultAddressId}
-          />
-        ))}
+        {addresses.length === 0 ? (
+          <AddressEmpty />
+        ) : (
+          addresses.map((address) => (
+            <AddressLitem
+              key={address.id}
+              {...address}
+              handleRemove={() => handleRemoveAddress(address.id)}
+              handleSetDefault={() => handleSetDefaultAddress(address.id)}
+              isDefault={address.id === defaultAddressId}
+            />
+          ))
+        )}
       </List>
       {!isEOP && <LoadMore onClick={loadMore}>더보기</LoadMore>}
       <Footer>
