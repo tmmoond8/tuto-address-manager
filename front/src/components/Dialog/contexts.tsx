@@ -1,5 +1,3 @@
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core';
 import { createContext, ReactNode } from 'react';
 
 const DialogContext = createContext({

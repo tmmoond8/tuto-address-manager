@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import { Color } from '../../styles';
 import AddressMoreActions from './AddressMoreActions';
 import { useDialog } from '../Dialog';
+import { useToast } from '../Toast';
 
 interface AddressListItemProps {
   postnumber: number;
@@ -26,6 +27,7 @@ export default function AddressListItem(props: AddressListItemProps) {
     handleSetDefault,
   } = props;
   const dialog = useDialog();
+  const toast = useToast();
   const onClickRemoveItem = useCallback(async () => {
     const confirm = await dialog.openConfirm(<p>정말 삭제하시겠습니까?</p>);
     if (confirm) {
@@ -33,12 +35,11 @@ export default function AddressListItem(props: AddressListItemProps) {
     }
   }, [dialog]);
   const openDialog = useCallback(async () => {
-    console.log('abc');
     const confirm = await dialog.openConfirm(<p>정말 삭제하시겠습니까?</p>);
   }, [dialog]);
 
   return (
-    <Item className={cx('AddressListItem', className)}>
+    <Item className={cx('AddressListItem', className)} onClick={() => {}}>
       <Content>
         <h3>
           {`[${postnumber}]`} {isDefault && <span>기본</span>}

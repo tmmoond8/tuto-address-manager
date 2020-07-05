@@ -13,20 +13,22 @@ export const useAddress = (): {
   const [originAddresses, setOriginAddresses] = useState<Address[]>([]);
   const [defaultAddressId, setDefaultAddressId] = useState<number>(-1);
   const [displaySize, setDisplaySize] = useState(1);
+  const [error, setError] = useState<string | null>(null);
+
   const addresses = useMemo(() => {
     const SIZE = 5;
     return originAddresses.slice(0, displaySize * SIZE);
   }, [originAddresses, displaySize]);
+
   const isEOP = useMemo(() => {
     const SIZE = 5;
-    console.log(originAddresses.length);
-    console.log(displaySize * SIZE);
     return originAddresses.length <= displaySize * SIZE;
   }, [originAddresses, displaySize]);
+
   const loadMore = useCallback(() => {
     setDisplaySize(displaySize + 1);
   }, [displaySize, setDisplaySize]);
-  const [error, setError] = useState<string | null>(null);
+
   const removeAddress = useCallback(
     (addressId: number) => {
       setOriginAddresses(

@@ -9,6 +9,7 @@ import AddressGuideBox from '../components/AddressGuideBox';
 import { Color } from '../styles';
 import { useAddress } from '../lib/hooks';
 import * as APIs from '../lib/apis';
+import { useToast } from '../components/Toast';
 
 export default function AddressPage() {
   const {
@@ -19,11 +20,13 @@ export default function AddressPage() {
     loadMore,
     isEOP,
   } = useAddress();
+  const toast = useToast();
   const handleSetDefaultAddress = useCallback(
     async (addressId: number) => {
       try {
         await APIs.setDefaultAddress(addressId);
         setDefaultAddressId(addressId);
+        toast.message('기본 배송지가 변경되었습니다.');
       } finally {
       }
     },

@@ -130,5 +130,6 @@ const Button = styled.button<{ primary?: boolean }>`
 `;
 
 Dialog.Provider = DialogProvider;
+Dialog.Context = DialogContext;
 
 export default Dialog;
