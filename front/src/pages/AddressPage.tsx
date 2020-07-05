@@ -6,15 +6,16 @@ import styled from '@emotion/styled';
 import AddressListHead from '../components/AddressListHead';
 import AddressLitem from '../components/AddressListItem';
 import AddressGuideBox from '../components/AddressGuideBox';
-import dummy from '../assets/addresses.json';
 import { Color } from '../styles';
+import { useAddress } from '../lib/hooks';
 
 export default function AddressPage() {
+  const { addresses } = useAddress();
   return (
     <Fragment>
       <AddressListHead handleAdd={() => {}} />
       <List>
-        {dummy.addresses.map((address) => (
+        {addresses.map((address) => (
           <AddressLitem
             key={address.id}
             {...address}
