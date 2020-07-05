@@ -13,7 +13,7 @@ interface AddressListItemProps {
   className?: string;
   isDefault?: boolean;
   handleRemove: () => void;
-  handleSetDefault: (id: number) => void;
+  handleSetDefault: () => void;
 }
 
 export default function AddressListItem(props: AddressListItemProps) {
@@ -23,6 +23,7 @@ export default function AddressListItem(props: AddressListItemProps) {
     isDefault = false,
     className,
     handleRemove,
+    handleSetDefault,
   } = props;
   const dialog = useDialog();
   const onClickRemoveItem = useCallback(async () => {
@@ -45,7 +46,7 @@ export default function AddressListItem(props: AddressListItemProps) {
         <p>{address}</p>
       </Content>
       <AddressMoreActions>
-        <AddressMoreActions.MenuItem>
+        <AddressMoreActions.MenuItem onClick={handleSetDefault}>
           기본 배송지 설정
         </AddressMoreActions.MenuItem>
         <AddressMoreActions.MenuItem onClick={onClickRemoveItem}>

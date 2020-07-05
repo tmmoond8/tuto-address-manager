@@ -1,6 +1,6 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
-import { Fragment } from 'react';
+import { Fragment, useCallback } from 'react';
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import AddressListHead from '../components/AddressListHead';
@@ -8,10 +8,20 @@ import AddressLitem from '../components/AddressListItem';
 import AddressGuideBox from '../components/AddressGuideBox';
 import { Color } from '../styles';
 import { useAddress } from '../lib/hooks';
-import { removeAddress } from '../lib/apis';
+import * as APIs from '../lib/apis';
 
 export default function AddressPage() {
-  const { addresses, defaultAddressId } = useAddress();
+  const { addresses, defaultAddressId, setDefaultAddressId } = useAddress();
+  const handleSetDefaultAddress = useCallback(
+    async (addressId: number) => {
+      try {
+        await APIs.setDefaultAddress(addressId);
+        setDefaultAddressId(addressId);
+      } finally {
+      }
+    },
+    [setDefaultAddressId],
+  );
   return (
     <Fragment>
       <AddressListHead handleAdd={() => {}} />
@@ -20,8 +30,8 @@ export default function AddressPage() {
           <AddressLitem
             key={address.id}
             {...address}
-            handleRemove={() => removeAddress(address.id)}
-            handleSetDefault={(id: number) => {}}
+            handleRemove={() => APIs.removeAddress(address.id)}
+            handleSetDefault={() => handleSetDefaultAddress(address.id)}
             isDefault={address.id === defaultAddressId}
           />
         ))}

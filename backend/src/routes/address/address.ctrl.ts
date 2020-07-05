@@ -50,14 +50,13 @@ class AddressController {
     next: express.NextFunction,
   ) => {
     const { id } = req.body;
-
     try {
       const [targetRecordIndex, targetRecord] = await new Promise(
         (resolve, reject) => {
           firebaseDB.ref('/address/addresses').on('value', function (data) {
             const addresses = data.toJSON();
             const targetRecord = Object.entries(addresses ?? {}).find(
-              ([key, value]) => value.id === id,
+              ([key, value]) => (value as any).id === id,
             );
             if (!targetRecord) {
               reject(`${id} not found`);
@@ -83,7 +82,7 @@ class AddressController {
       });
     } catch (error) {
       console.error(error);
-      res.status(500).send(error);
+      res.status(500).send({ data: error });
     }
   };
 
@@ -100,7 +99,7 @@ class AddressController {
           firebaseDB.ref('/address/addresses').on('value', function (data) {
             const addresses = data.toJSON();
             const targetRecord = Object.entries(addresses ?? {}).find(
-              ([key, value]) => value.id === id,
+              ([key, value]) => (value as any).id === id,
             );
             if (!targetRecord) {
               reject(`${id} not found`);

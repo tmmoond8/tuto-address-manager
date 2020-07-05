@@ -23,3 +23,12 @@ export const removeAddress = async (
     data: { address: Address };
   }>
 > => await api.delete('address/remove', { data: { id: addressId } });
+
+export const setDefaultAddress = async (
+  addressId: number,
+): Promise<
+  AxiosResponse<{
+    message: string;
+    data: { address: Address };
+  }>
+> => await api.patch('address/default', { id: addressId });
