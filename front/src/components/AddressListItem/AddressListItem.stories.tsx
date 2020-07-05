@@ -7,7 +7,7 @@ export default {
   component: AddressListItem,
 };
 const model = {
-  zipCode: '12345',
+  postnumber: 12345,
   address: '서울시 강남구 강남대로',
   handleRemove: action('remove'),
   handleSetDefault: action('default set'),

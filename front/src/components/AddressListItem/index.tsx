@@ -5,21 +5,21 @@ import styled from '@emotion/styled';
 import { Color, tablet, desktop } from '../../styles';
 
 interface AddressListItemProps {
-  zipCode: string;
+  postnumber: number;
   address: string;
   className?: string;
   isDefault?: boolean;
-  handleRemove: (id: string) => void;
-  handleSetDefault: (id: string) => void;
+  handleRemove: (id: number) => void;
+  handleSetDefault: (id: number) => void;
 }
 
 export default function AddressListItem(props: AddressListItemProps) {
-  const { zipCode, address, isDefault = false, className } = props;
+  const { postnumber, address, isDefault = false, className } = props;
   return (
     <Item className={cx('AddressListItem', className)}>
       <Content>
         <h3>
-          {`[${zipCode}]`} {isDefault && <span>기본</span>}
+          {`[${postnumber}]`} {isDefault && <span>기본</span>}
         </h3>
         <p>{address}</p>
       </Content>
