@@ -40,7 +40,7 @@ export default function TabLayout(props: TabLayoutProps) {
   const { children } = props;
   const [tabIndex, setTabIndex] = useState(3);
   const handleClickTab = useCallback((index: number) => {
-    setTabIndex(index); 
+    setTabIndex(index);
   }, []);
   return (
     <div>
@@ -79,15 +79,15 @@ const Tabs = styled.ul`
   align-items: center;
   justify-content: space-between;
   margin: 0 28px;
-  border-bottom: solid 1px ${Color.Greyce};
+  border-bottom: solid 1px ${Color.GreyCE};
   list-style: none;
 `;
 
 const TabItem = styled.li<{ active: boolean }>`
-  color: ${(p) => (p.active ? `${Color.Grey3e}` : `${Color.Grey99}`)};
+  color: ${(p) => (p.active ? `${Color.Grey3E}` : `${Color.Grey99}`)};
   font-size: 20px;
   font-weight: ${(p) => (p.active ? 'bold' : 'normal')};
   padding: 10px 0 8px;
   border-bottom: 3px solid
-    ${(p) => (p.active ? `${Color.Grey3e}` : `${Color.Transparent}`)};
+    ${(p) => (p.active ? `${Color.Grey3E}` : `${Color.Transparent}`)};
 `;
