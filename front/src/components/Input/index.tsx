@@ -40,7 +40,7 @@ const InputWrapper = styled.div`
 `;
 
 const BaseInput = styled.input<{ error: boolean; isFull: boolean }>`
-  max-width: ${(p) => (p.isFull ? '320px' : '228px')};
+  max-width: ${(p) => (p.isFull ? '100%' : '228px')};
   width: 100%;
   padding: 13px 14px;
   border-radius: 4px;
