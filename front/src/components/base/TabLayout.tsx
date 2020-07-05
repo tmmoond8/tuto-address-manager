@@ -78,7 +78,7 @@ const Tabs = styled.ul`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 28px;
+  padding: 0 28px;
   border-bottom: solid 1px ${Color.GreyCE};
   list-style: none;
 `;

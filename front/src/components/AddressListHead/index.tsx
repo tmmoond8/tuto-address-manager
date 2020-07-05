@@ -1,8 +1,10 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
+import { Fragment, useCallback } from 'react';
 import cx from 'classnames';
 import styled from '@emotion/styled';
 import { Color, tablet, desktop } from '../../styles';
+import { useModal } from '../Modal';
 
 interface AddressListHeadProps {
   handleAdd: () => void;
@@ -11,10 +13,14 @@ interface AddressListHeadProps {
 
 export default function AddressListHead(props: AddressListHeadProps) {
   const { handleAdd, className } = props;
+  const modal = useModal();
+  const handleOpenAddressForm = useCallback(() => {
+    modal.open('배송지 추가', <Fragment></Fragment>);
+  }, [modal]);
   return (
     <Head className={cx('AddressHead', className)}>
       <h3>등록된 배송지</h3>
-      <Button onClick={handleAdd}>+ 추가</Button>
+      <Button onClick={handleOpenAddressForm}>+ 추가</Button>
     </Head>
   );
 }
