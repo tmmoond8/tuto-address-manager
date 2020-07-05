@@ -1,33 +1,54 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useRef } from 'react';
 import styled from '@emotion/styled';
 import { Color } from '../../styles';
 
 interface CheckBoxProps {
   checked: boolean;
-  toggle: (value: string) => void;
+  toggle: (value: boolean) => void;
   children: ReactNode;
 }
 
 export default function CheckBox(props: CheckBoxProps) {
   const { checked, toggle, children } = props;
+  const hiddenCheckRef = useRef<HTMLInputElement>();
 
   return (
     <CheckBoxWrapper>
-      <Check checked={checked} />
+      <HiddenCheck type="checkbox" checked={checked} ref={hiddenCheckRef} />
+      <Check
+        checked={checked}
+        onClick={(e) => {
+          if (hiddenCheckRef.current) {
+            toggle(!hiddenCheckRef.current.checked);
+          }
+        }}
+      />
       {children}
     </CheckBoxWrapper>
   );
 }
 
 const CheckBoxWrapper = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding: 7px 6px;
   color: ${Color.Grey3D};
   font-size: 14px;
+  line-height: 1.5;
+`;
+
+const HiddenCheck = styled.input<{ checked: boolean }>`
+  position: absolute;
+  top: 8px;
+  left: 7px;
+  width: 20px;
+  height: 20px;
+  z-index: 10;
+  visibility: hidden;
 `;
 
 const Check = styled.div<{ checked: boolean }>`
