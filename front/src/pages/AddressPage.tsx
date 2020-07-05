@@ -11,7 +11,12 @@ import { useAddress } from '../lib/hooks';
 import * as APIs from '../lib/apis';
 
 export default function AddressPage() {
-  const { addresses, defaultAddressId, setDefaultAddressId } = useAddress();
+  const {
+    addresses,
+    defaultAddressId,
+    setDefaultAddressId,
+    removeAddress,
+  } = useAddress();
   const handleSetDefaultAddress = useCallback(
     async (addressId: number) => {
       try {
@@ -22,6 +27,16 @@ export default function AddressPage() {
     },
     [setDefaultAddressId],
   );
+  const handleRemoveAddress = useCallback(
+    async (addressId: number) => {
+      try {
+        await APIs.removeAddress(addressId);
+        removeAddress(addressId);
+      } finally {
+      }
+    },
+    [removeAddress],
+  );
   return (
     <Fragment>
       <AddressListHead handleAdd={() => {}} />
@@ -30,7 +45,7 @@ export default function AddressPage() {
           <AddressLitem
             key={address.id}
             {...address}
-            handleRemove={() => APIs.removeAddress(address.id)}
+            handleRemove={() => handleRemoveAddress(address.id)}
             handleSetDefault={() => handleSetDefaultAddress(address.id)}
             isDefault={address.id === defaultAddressId}
           />
