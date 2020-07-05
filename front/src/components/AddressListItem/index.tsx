@@ -3,7 +3,8 @@ import { css, jsx } from '@emotion/core';
 import { useCallback } from 'react';
 import cx from 'classnames';
 import styled from '@emotion/styled';
-import { Color, tablet, desktop } from '../../styles';
+import { Color } from '../../styles';
+import AddressMoreActions from './AddressMoreActions';
 import { useDialog } from '../Dialog';
 
 interface AddressListItemProps {
@@ -11,18 +12,28 @@ interface AddressListItemProps {
   address: string;
   className?: string;
   isDefault?: boolean;
-  handleRemove: (id: number) => void;
+  handleRemove: () => void;
   handleSetDefault: (id: number) => void;
 }
 
 export default function AddressListItem(props: AddressListItemProps) {
-  const { postnumber, address, isDefault = false, className } = props;
+  const {
+    postnumber,
+    address,
+    isDefault = false,
+    className,
+    handleRemove,
+  } = props;
   const dialog = useDialog();
+  const onClickRemoveItem = useCallback(async () => {
+    const confirm = await dialog.openConfirm(<p>정말 삭제하시겠습니까?</p>);
+    if (confirm) {
+      handleRemove();
+    }
+  }, [dialog]);
   const openDialog = useCallback(async () => {
     console.log('abc');
-    const confirm = await dialog.openConfirm(
-      <p>신청하신 투자를 취소하시겠습니까?</p>,
-    );
+    const confirm = await dialog.openConfirm(<p>정말 삭제하시겠습니까?</p>);
   }, [dialog]);
 
   return (
@@ -33,7 +44,14 @@ export default function AddressListItem(props: AddressListItemProps) {
         </h3>
         <p>{address}</p>
       </Content>
-      <MoreActions onClick={openDialog} />
+      <AddressMoreActions>
+        <AddressMoreActions.MenuItem>
+          기본 배송지 설정
+        </AddressMoreActions.MenuItem>
+        <AddressMoreActions.MenuItem onClick={onClickRemoveItem}>
+          삭제
+        </AddressMoreActions.MenuItem>
+      </AddressMoreActions>
     </Item>
   );
 }
@@ -46,24 +64,6 @@ const Item = styled.li`
 
   & + & {
     border-top: 1px solid ${Color.Grey8C};
-  }
-`;
-
-const MoreActions = styled.div`
-  position: relative;
-  width: 26px;
-  height: 26px;
-  border: 1px solid ${Color.GreyE1};
-  border-radius: 13px;
-  background: #ffffff;
-  ::before {
-    content: '···';
-    position: absolute;
-    left: 3px;
-    top: 4px;
-    font-size: 24px;
-    font-weight: 900;
-    color: ${Color.Grey8C};
   }
 `;
 

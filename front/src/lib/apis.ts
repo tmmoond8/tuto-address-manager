@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import { Address } from '../types';
 
 const API_HOST = 'http://localhost:30001';
@@ -14,3 +14,12 @@ export const getAddress = async (): Promise<
     data: { addresses: Address[]; default: number };
   }>
 > => await api.get('address/list');
+
+export const removeAddress = async (
+  addressId: number,
+): Promise<
+  AxiosResponse<{
+    message: string;
+    data: { address: Address };
+  }>
+> => await api.delete('address/remove', { data: { id: addressId } });

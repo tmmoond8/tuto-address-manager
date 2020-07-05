@@ -8,6 +8,7 @@ import AddressLitem from '../components/AddressListItem';
 import AddressGuideBox from '../components/AddressGuideBox';
 import { Color } from '../styles';
 import { useAddress } from '../lib/hooks';
+import { removeAddress } from '../lib/apis';
 
 export default function AddressPage() {
   const { addresses } = useAddress();
@@ -19,7 +20,7 @@ export default function AddressPage() {
           <AddressLitem
             key={address.id}
             {...address}
-            handleRemove={(id: number) => {}}
+            handleRemove={() => removeAddress(address.id)}
             handleSetDefault={(id: number) => {}}
           />
         ))}
