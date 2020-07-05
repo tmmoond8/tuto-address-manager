@@ -1,8 +1,10 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
+import { useCallback } from 'react';
 import cx from 'classnames';
 import styled from '@emotion/styled';
 import { Color, tablet, desktop } from '../../styles';
+import { useDialog } from '../Dialog';
 
 interface AddressListItemProps {
   postnumber: number;
@@ -15,6 +17,14 @@ interface AddressListItemProps {
 
 export default function AddressListItem(props: AddressListItemProps) {
   const { postnumber, address, isDefault = false, className } = props;
+  const dialog = useDialog();
+  const openDialog = useCallback(async () => {
+    console.log('abc');
+    const confirm = await dialog.openConfirm(
+      <p>신청하신 투자를 취소하시겠습니까?</p>,
+    );
+  }, [dialog]);
+
   return (
     <Item className={cx('AddressListItem', className)}>
       <Content>
@@ -23,13 +33,14 @@ export default function AddressListItem(props: AddressListItemProps) {
         </h3>
         <p>{address}</p>
       </Content>
-      <MoreActions />
+      <MoreActions onClick={openDialog} />
     </Item>
   );
 }
 
 const Item = styled.li`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 20px;
 

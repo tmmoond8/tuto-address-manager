@@ -88,6 +88,7 @@ export default css`
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    box-sizing: border-box;
   }
 
   /* make sure to set some focus styles for accessibility */
