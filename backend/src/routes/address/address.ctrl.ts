@@ -50,25 +50,83 @@ class AddressController {
     next: express.NextFunction,
   ) => {
     const { id } = req.body;
-    const [index, targetRecord] = await new Promise((resolve, reject) => {
-      firebaseDB.ref('/address/addresses').on('value', function (data) {
-        const addresses = data.toJSON();
-        const targetRecord = Object.entries(addresses ?? {}).find(
-          ([key, value]) => value.id === id,
-        );
-        resolve(targetRecord);
-      });
-    });
-    if (index) {
-      await firebaseDB.ref(`/address/addresses/${index}`).remove();
-    }
 
-    return res.json({
-      message: 'remove',
-      data: {
-        [index]: targetRecord,
-      },
-    });
+    try {
+      const [targetRecordIndex, targetRecord] = await new Promise(
+        (resolve, reject) => {
+          firebaseDB.ref('/address/addresses').on('value', function (data) {
+            const addresses = data.toJSON();
+            const targetRecord = Object.entries(addresses ?? {}).find(
+              ([key, value]) => value.id === id,
+            );
+            if (!targetRecord) {
+              reject(`${id} not found`);
+            }
+            resolve(targetRecord);
+          });
+        },
+      );
+
+      const removeItem = async (index) => {
+        if (index) {
+          await firebaseDB.ref(`/address/addresses/${index}`).remove();
+          return 'success to remove';
+        }
+        return 'failed to remove';
+      };
+      const message = await removeItem(targetRecordIndex);
+      return res.json({
+        message,
+        data: {
+          [targetRecordIndex]: targetRecord,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send(error);
+    }
+  };
+
+  public setDefaultAddress = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+  ) => {
+    const { id } = req.body;
+
+    try {
+      const [targetRecordIndex, targetRecord] = await new Promise(
+        (resolve, reject) => {
+          firebaseDB.ref('/address/addresses').on('value', function (data) {
+            const addresses = data.toJSON();
+            const targetRecord = Object.entries(addresses ?? {}).find(
+              ([key, value]) => value.id === id,
+            );
+            if (!targetRecord) {
+              reject(`${id} not found`);
+            }
+            resolve(targetRecord);
+          });
+        },
+      );
+      const setDefault = async (index) => {
+        if (index) {
+          await firebaseDB.ref(`/address/default`).set(id);
+          return 'success to set';
+        }
+        return 'failed to set';
+      };
+      const message = await setDefault(targetRecordIndex);
+      return res.json({
+        message,
+        data: {
+          [targetRecordIndex]: targetRecord,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send(error);
+    }
   };
 }
 

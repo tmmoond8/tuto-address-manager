@@ -11,7 +11,7 @@ import { useAddress } from '../lib/hooks';
 import { removeAddress } from '../lib/apis';
 
 export default function AddressPage() {
-  const { addresses } = useAddress();
+  const { addresses, defaultAddressId } = useAddress();
   return (
     <Fragment>
       <AddressListHead handleAdd={() => {}} />
@@ -22,6 +22,7 @@ export default function AddressPage() {
             {...address}
             handleRemove={() => removeAddress(address.id)}
             handleSetDefault={(id: number) => {}}
+            isDefault={address.id === defaultAddressId}
           />
         ))}
       </List>
