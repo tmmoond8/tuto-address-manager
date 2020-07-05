@@ -4,7 +4,7 @@ import cx from 'classnames';
 import styled from '@emotion/styled';
 import { Color, tablet, desktop } from '../../styles';
 
-interface AddressItemProps {
+interface AddressListItemProps {
   zipCode: string;
   address: string;
   className?: string;
@@ -13,10 +13,10 @@ interface AddressItemProps {
   handleSetDefault: (id: string) => void;
 }
 
-export default function AddressItem(props: AddressItemProps) {
+export default function AddressListItem(props: AddressListItemProps) {
   const { zipCode, address, isDefault = false, className } = props;
   return (
-    <Item className={cx('AddressItem', className)}>
+    <Item className={cx('AddressListItem', className)}>
       <Content>
         <h3>
           {`[${zipCode}]`} {isDefault && <span>기본</span>}
