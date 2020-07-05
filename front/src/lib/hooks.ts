@@ -7,6 +7,7 @@ export const useAddress = (): {
   defaultAddressId: number;
   setDefaultAddressId: (addressId: number) => void;
   removeAddress: (addressId: number) => void;
+  addAddress: (address: Address) => void;
   loadMore: () => void;
   isEOP: boolean;
 } => {
@@ -38,6 +39,13 @@ export const useAddress = (): {
     [originAddresses, setOriginAddresses],
   );
 
+  const addAddress = useCallback(
+    (address: Address) => {
+      setOriginAddresses([address, ...originAddresses]);
+    },
+    [originAddresses, setOriginAddresses],
+  );
+
   useEffect(() => {
     (async (): Promise<void> => {
       try {
@@ -62,6 +70,7 @@ export const useAddress = (): {
     defaultAddressId,
     setDefaultAddressId,
     removeAddress,
+    addAddress,
     loadMore,
     isEOP,
   };

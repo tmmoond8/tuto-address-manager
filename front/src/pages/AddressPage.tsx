@@ -18,6 +18,7 @@ export default function AddressPage() {
     defaultAddressId,
     setDefaultAddressId,
     removeAddress,
+    addAddress,
     loadMore,
     isEOP,
   } = useAddress();
@@ -33,6 +34,7 @@ export default function AddressPage() {
     },
     [setDefaultAddressId],
   );
+
   const handleRemoveAddress = useCallback(
     async (addressId: number) => {
       try {
@@ -43,9 +45,33 @@ export default function AddressPage() {
     },
     [removeAddress],
   );
+
+  const handleAddAddress = useCallback(
+    async (data: {
+      postnumber: number;
+      address: string;
+      name: string;
+      isSetDefault: boolean;
+    }) => {
+      const { postnumber, address, name, isSetDefault } = data;
+      try {
+        const {
+          data: { data },
+        } = await APIs.addAddress({
+          postnumber,
+          address,
+          name,
+        });
+        addAddress(data.address);
+      } finally {
+      }
+    },
+    [],
+  );
+
   return (
     <Fragment>
-      <AddressListHead handleAdd={() => {}} />
+      <AddressListHead handleAdd={handleAddAddress} />
       <List>
         {addresses.length === 0 ? (
           <AddressEmpty />

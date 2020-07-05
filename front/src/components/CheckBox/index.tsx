@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { ReactNode, useRef } from 'react';
+import { ReactNode, createRef } from 'react';
 import styled from '@emotion/styled';
 import { Color } from '../../styles';
 
@@ -12,7 +12,7 @@ interface CheckBoxProps {
 
 export default function CheckBox(props: CheckBoxProps) {
   const { checked, toggle, children } = props;
-  const hiddenCheckRef = useRef<HTMLInputElement>();
+  const hiddenCheckRef = createRef<HTMLInputElement>();
 
   return (
     <CheckBoxWrapper>
@@ -20,7 +20,7 @@ export default function CheckBox(props: CheckBoxProps) {
       <Check
         checked={checked}
         onClick={(e) => {
-          if (hiddenCheckRef.current) {
+          if (hiddenCheckRef && hiddenCheckRef.current) {
             toggle(!hiddenCheckRef.current.checked);
           }
         }}

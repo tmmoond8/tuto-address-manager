@@ -20,7 +20,7 @@ export default function Input(props: InputProps) {
     isFull = false,
     errorMessage = '',
   } = props;
-  const error = useMemo(() => !!errorMessage, [errorMessage]);
+  const error = useMemo(() => errorMessage === null, [errorMessage]);
 
   return (
     <InputWrapper>

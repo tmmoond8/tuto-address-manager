@@ -68,6 +68,8 @@ const ModalWrapper = styled.div<{ open: boolean }>`
 `;
 
 const ModalBox = styled.div<{ open: boolean }>`
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   max-width: 510px;
@@ -78,7 +80,7 @@ const ModalBox = styled.div<{ open: boolean }>`
 `;
 
 const Title = styled.div`
-  padding: 30px 20px 10px;
+  padding: 30px 20px 37px;
   font-size: 22px;
   font-weight: bold;
   color: ${Color.Grey3D};
@@ -97,7 +99,8 @@ const CloseButton = styled.button`
 `;
 
 const Body = styled.div`
-  border: 0 20px;
+  flex: 1;
+  padding: 0 20px;
 `;
 
 Modal.Provider = ModalProvider;

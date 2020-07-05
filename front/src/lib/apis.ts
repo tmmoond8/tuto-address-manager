@@ -15,6 +15,17 @@ export const getAddress = async (): Promise<
   }>
 > => await api.get('address/list');
 
+export const addAddress = async (params: {
+  address: string;
+  name: string;
+  postnumber: number;
+}): Promise<
+  AxiosResponse<{
+    message: string;
+    data: { address: Address };
+  }>
+> => await api.post('address/add', params);
+
 export const removeAddress = async (
   addressId: number,
 ): Promise<

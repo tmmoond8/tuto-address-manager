@@ -33,14 +33,16 @@ class AddressController {
         resolve(nextIndex);
       });
     });
+    console.log(nextIndex);
+    const uniqueId = Number.parseInt(
+      (Math.random() * 123031233342343545).toString().substr(0, 11),
+    );
     await firebaseDB.ref('/address/addresses').update({
-      [nextIndex]: postData,
+      [nextIndex]: { ...postData, id: uniqueId },
     });
     return res.json({
       message: 'add',
-      data: {
-        [nextIndex]: postData,
-      },
+      data: { ...postData, id: uniqueId },
     });
   };
 
