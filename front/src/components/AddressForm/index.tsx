@@ -77,7 +77,7 @@ export default function AddressForm(props: AddressFormProps) {
         />
         <CheckBox
           checked={data.isSetDefault}
-          toggle={handleOnchange('default')}
+          toggle={handleOnchange('isSetDefault')}
         >
           기본 배송지로 등록
         </CheckBox>

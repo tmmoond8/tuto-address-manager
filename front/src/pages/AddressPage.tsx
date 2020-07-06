@@ -62,7 +62,10 @@ export default function AddressPage() {
           address,
           name,
         });
-        addAddress(data.address);
+        addAddress(data);
+        if (isSetDefault) {
+          setDefaultAddressId(data.id);
+        }
       } finally {
       }
     },

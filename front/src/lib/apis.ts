@@ -22,7 +22,7 @@ export const addAddress = async (params: {
 }): Promise<
   AxiosResponse<{
     message: string;
-    data: { address: Address };
+    data: Address;
   }>
 > => await api.post('address/add', params);
 

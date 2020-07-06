@@ -6,10 +6,11 @@ import ModalProvider from './ModalProvider';
 
 export function useModal(): {
   open: any;
+  close: any;
   opened: boolean;
 } {
-  const { open, opened } = React.useContext(ModalContext);
-  return { open, opened };
+  const { open, close, opened } = React.useContext(ModalContext);
+  return { open, opened, close };
 }
 
 function Modal(): JSX.Element {
