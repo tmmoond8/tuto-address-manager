@@ -26,6 +26,7 @@
     "typescript": "^3.4.2"
   },
   "scripts": {
-    "dev": "cd src && nodemon --exec ts-node index.ts"
+    "dev": "cd src && nodemon --exec ts-node index.ts",
+    "start": "cd src && ts-node index.ts"
   }
 }
